@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DarkSouls3SaveGameBackupTool
+namespace DarkSouls3BackupTool
 {
     /// <summary>
     /// Interaction logic for App.xaml

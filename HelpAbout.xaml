@@ -1,0 +1,45 @@
+﻿<Window x:Class="DarkSouls3BackupTool.HelpAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DarkSouls3BackupTool"
+        mc:Ignorable="d"
+        Title="Help / About" Height="341.486" Width="456.466" ResizeMode="NoResize" Icon="Images\icon.png" WindowStartupLocation="CenterOwner">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\bg.jpg" Opacity=".87"/>
+        </Grid.Background>
+
+        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="1280,-80,-868,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_close" Content="Close" ToolTip="Close the Help / About window" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="btn_close_Click" Height="21" Foreground="#FFF5EECF" BorderBrush="#FFF5EECF" Style="{StaticResource ButtonFix}" Background="#FF515151"/>
+        <Label x:Name="lbl_helpContents" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="#FFF5EECF" Width="433" FontSize="8.5pt" Height="173">
+            <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center" Width="422" Height="163">
+                Super Handy Dark Souls III Backup Tool!<LineBreak /><LineBreak />
+                Creates backups every x seconds, or immediately when your saves are changed<LineBreak />
+                Maximum backup limit, deletes oldest backups when limit reached (size or quantity)<LineBreak />
+                Settings are stored in BackupConfig.xml within the Dark Souls AppData folder<LineBreak />
+                Backs up all profiles if there are more than one (Steam accounts, GOG etc.)<LineBreak />
+                Doesn't create backups if Dark Souls has not modified any saves<LineBreak />
+                Doesn't create backups if Dark Souls is not running<LineBreak />
+                Can start backing up immediately on startup<LineBreak />
+                Quick 'n Easy backup loading UI, with thumbnails for each backup!<LineBreak />
+            </TextBlock>
+        </Label>
+        <Label x:Name="lbl_aboutContents" HorizontalAlignment="Center" Margin="112,188,107,0" VerticalAlignment="Top" Foreground="#FFF5EECF" Width="234" FontSize="8.5pt" Height="116">
+            <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center" Width="224" Height="110">
+                Original version created by svaalbard. <LineBreak />
+                github.com/insane0hflex <LineBreak /> <LineBreak />
+                
+                Version 3 rewrite created by Jess Thomason.<LineBreak />
+                TODO: GitHub link here!<LineBreak /> <LineBreak />
+                
+                Current Version : 3.0 - 12/05/2016
+            </TextBlock>
+        </Label>
+        <Popup>
+            <Grid Background="#FFE5E5E5" Height="4.587" Width="0"/>
+        </Popup>
+
+    </Grid>
+</Window>

@@ -1,7 +1,7 @@
-﻿<Application x:Class="DarkSouls3SaveGameBackupTool.App"
+﻿<Application x:Class="DarkSouls3BackupTool.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DarkSouls3SaveGameBackupTool"
+             xmlns:local="clr-namespace:DarkSouls3BackupTool"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="ButtonFix" TargetType="Button">
