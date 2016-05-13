@@ -25,7 +25,7 @@
         <TextBox x:Name="txtBox_log" Margin="11,116,10,39" TextWrapping="Wrap" Text="" ScrollViewer.VerticalScrollBarVisibility="Visible" IsReadOnly="True" Background="#FF515151" Foreground="#FFF5EECF" BorderBrush="#FFF5EECF"/>
         <Label x:Name="lbl_nextBackupTime" Content="Next Backup Time : 00:00:00" HorizontalAlignment="Right" Margin="0,88,5,148" Foreground="#FFF5EECF" Width="162"/>
         <Label x:Name="lbl_backupFolderSize" Content="Backup Folder Size : 00000 / 0000 MB" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,8" Foreground="#FFF5EECF" Width="212"/>
-        <Label x:Name="lbl_log" Content="Log:" Margin="10,91,155,290" Foreground="#FFF5EECF"/>
+        <Label x:Name="lbl_log" Content="Log:" Margin="10,91,0,0" Foreground="#FFF5EECF" HorizontalAlignment="Left" Width="354" Height="27" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

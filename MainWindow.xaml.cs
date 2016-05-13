@@ -102,6 +102,8 @@ namespace DarkSouls3BackupTool {
 
             btn_Stop_Toggle(false);
             btn_Start_Toggle(true);
+
+            lbl_nextBackupTime.Content = "Next Backup Time : 00:00:00";
         }
 
         void btn_restore_Click(object sender, RoutedEventArgs e) {
