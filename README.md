@@ -1,7 +1,13 @@
 # Dark Souls III Super Backup Tool!
-![DarkSouls3SuperBackupTool](https://github.com/pikl/DarkSouls3SuperBackupTool/blob/master/Images/example.png)
+![DarkSouls3SuperBackupTool](https://github.com/pikl/DarkSouls3SuperBackupTool/blob/master/Images/Main Window.png)
 
-Original version by [insane0hflex](https://github.com/insane0hflex).
+### What is?
+A handy tool that creates backups for your Dark Souls III saves, highly configurable and very easy to use.
+Based off the original backup tool created by [insane0hflex](https://github.com/insane0hflex).
+
+## NOTE : 
+### This Readme does not yet accurately represent the application.
+### The Super Backup Tool is currently in development, it is not recommended to use it in it's current state.
 
 ### What do?
 + Creates backups every x seconds, or immediately when your saves are changed
@@ -38,4 +44,4 @@ Back ups are created in the following format:
 `Month-Day-Year_Hour-Minute-Second_DS30000.sl2`
 
 ### Releases
-[Version 3.0](https://github.com/pikl/DarkSouls3SuperBackupTool/blob/master/Images/example.png)
+[Version 1.0](https://github.com/pikl/DarkSouls3SuperBackupTool/releases/blah)
