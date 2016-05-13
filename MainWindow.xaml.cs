@@ -16,8 +16,14 @@ namespace DarkSouls3BackupTool {
     public partial class MainWindow : Window {
 
         #region Fields
-        internal readonly string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DarkSoulsIII");
+        internal static readonly string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DarkSoulsIII");
         
+        public static string ScreenshotFolder {
+            get {
+                return Path.Combine(appDataFolder, "Backup Thumbnails");
+            }
+        }
+
         internal string ConfigFilename {
             get {
                 return Path.Combine(appDataFolder, "BackupConfig.xml");
@@ -29,7 +35,7 @@ namespace DarkSouls3BackupTool {
         Dictionary<string, DateTime?> lastWriteTime = new Dictionary<string, DateTime?>();
         Config config;
         #endregion
-
+        
         #region Init
         public MainWindow() {
             InitializeComponent();
@@ -39,6 +45,9 @@ namespace DarkSouls3BackupTool {
 
             config = new Config(this);
 
+            if (!Directory.Exists(ScreenshotFolder) && config.Screenshot.Value)
+                Directory.CreateDirectory(ScreenshotFolder);
+            
             foreach (string profile in Directory.GetDirectories(appDataFolder))
                 lastWriteTime.Add(profile.Substring(profile.LastIndexOf('\\') + 1), null);
 
@@ -63,6 +72,8 @@ namespace DarkSouls3BackupTool {
                 btn_start_Click(null, null);
             } else
                 btn_Stop_Toggle(false);
+
+            UpdateSize();
         }
         #endregion
 
@@ -80,6 +91,8 @@ namespace DarkSouls3BackupTool {
 
             btn_Start_Toggle(false);
             btn_Stop_Toggle(true);
+
+            UpdateNextTime();
         }
         
         void btn_stop_Click(object sender, RoutedEventArgs e) {
@@ -92,50 +105,9 @@ namespace DarkSouls3BackupTool {
         }
 
         void btn_restore_Click(object sender, RoutedEventArgs e) {
-            System.Windows.MessageBox.Show("Restore UI still TODO!");
-            //Restore s = new Restore();
-            //s.Owner = this;
-            //s.ShowDialog();
-
-            //Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
-
-            //fileDialog.Filter = "Dark Souls 3 Save Game Backups (.sl2)|*.sl2";
-            //fileDialog.InitialDirectory = appDataFolder;
-
-            //bool? result = fileDialog.ShowDialog();
-
-            ////user selected a file to use as the backup
-            //if (result == true) {
-            //    string backupChoiceFileName = fileDialog.FileName;
-
-            //    string deleteConfirmationMessage = "Are you sure? This will DELETE DS30000.sl2 (your current save file) and replace it with: "
-            //                                     + Environment.NewLine + Path.GetFileName(backupChoiceFileName);
-
-            //    string profile = Path.GetDirectoryName(backupChoiceFileName);
-
-            //    MessageBoxResult messageBoxResult = MessageBox.Show(deleteConfirmationMessage, "Delete DS30000.sl2 Confirmation", MessageBoxButton.YesNo);
-
-            //    if (messageBoxResult == MessageBoxResult.Yes) {
-            //        try {
-            //            //back up the original incase user error idea...
-            //            //Directory.CreateDirectory(saveGameLocation + "RestoredSaveBackups
-            //            //File.Copy(saveGameLocation + "DS30000.sl2", saveGameLocation + "\\RestoredSaveBackups\\" + "DeletedSave__DS30000.sl2.bak");
-
-            //            File.Delete(Path.Combine(profile, "DS30000.sl2"));
-            //            Log("Deleted DS30000.sl2...");
-
-            //            File.Copy(backupChoiceFileName, Path.Combine(profile, "DS30000.sl2"));
-            //            Log("Created DS30000.sl2 from backup...");
-
-            //            CustomNotificationMessageBox("Back up has been successfully restored.");
-            //        } catch (Exception ex) {
-            //            ErrorBox(ex.ToString());
-            //        }
-
-            //    }
-
-            //}
-
+            Restore s = new Restore();
+            s.Owner = this;
+            s.ShowDialog();
         }
 
         void btn_help_Click(object sender, RoutedEventArgs e) {
@@ -190,47 +162,62 @@ namespace DarkSouls3BackupTool {
         #endregion
 
         #region Backup Timer
+        string backupFilename, num;
+        DateTime curWriteTime;
         void dispatcherTimer_Tick(object sender, EventArgs e) {
+            UpdateNextTime();
+
             if (!config.IfNotRunning.Value && Process.GetProcessesByName("DarkSoulsIII").Length == 0) {
                 Log("Dark Souls 3 is not running, skipping backup creation...");
                 return;
             }
-                
-            string dateOfBackupForFileName = DateTime.Now.ToString("MM/d/yy HH:mm:ss");
+
+            backupFilename = DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss tt") + ".sl2";
+
+            if (config.Screenshot.Value)
+                Screenshot(Path.Combine(ScreenshotFolder, Path.ChangeExtension(backupFilename, ".png")));
 
             foreach (string profile in Directory.GetDirectories(appDataFolder)) {
-                try {
-                    if (profile == "Backups")
-                        continue;
+                if (profile.Contains("Backup Thumbnails"))
+                    continue;
 
-                    string num = profile.Substring(profile.LastIndexOf('\\') + 1);
+                num = profile.Substring(profile.LastIndexOf('\\') + 1);
 
-                    DateTime curWriteTime = File.GetLastWriteTime(Path.Combine(profile, "DS30000.sl2"));
+                curWriteTime = File.GetLastWriteTime(Path.Combine(profile, "DS30000.sl2"));
 
-                    if (lastWriteTime[num] != null && lastWriteTime[num] == curWriteTime && !config.IfNotChanged.Value) {
-                        Log("Save file for " + num + " unchanged! Skipping backup");
-                        continue;
-                    }
-                    
-                    //Remove spaces, : and / from dateOfBackupForFileName and replace with dash
-                    dateOfBackupForFileName = System.Text.RegularExpressions.Regex.Replace(dateOfBackupForFileName, @"[:|/|\s]", "-");
-
-                    File.Copy(Path.Combine(profile, "DS30000.sl2"),
-                                Path.Combine(profile, dateOfBackupForFileName + ".sl2"));
-
-                    Log("Created a new backup for profile " + num);
-                    lastWriteTime[num] = curWriteTime;
-                    
-                } catch (Exception ex) {
-                    ErrorBox(ex.Message);
-
-                    if (dispatcherTimer.IsEnabled) {
-                        dispatcherTimer.Stop();
-                    }
+                if (lastWriteTime[num] != null && lastWriteTime[num] == curWriteTime && !config.IfNotChanged.Value) {
+                    Log("Save file for " + num + " unchanged! Skipping backup");
+                    continue;
                 }
 
-                //Screenshot(Path.Combine(profile, dateOfBackupForFileName + ".png"));
+                File.Copy(Path.Combine(profile, "DS30000.sl2"),
+                            Path.Combine(profile, backupFilename));
+
+                Log("Created a new backup for profile " + num);
+                lastWriteTime[num] = curWriteTime;
             }
+
+            UpdateSize();
+        }
+         
+        void UpdateNextTime() {
+            string time = DateTime.Now.AddTicks(dispatcherTimer.Interval.Ticks).ToString("hh:mm:ss");
+
+            lbl_nextBackupTime.Content = string.Format("Next Backup Time : {0}", time);
+        }
+
+        void UpdateSize() {
+            long count = 0, bytes = 0;
+
+            foreach (string name in Directory.GetFiles(appDataFolder, "*.*", SearchOption.AllDirectories)) {
+                bytes += new FileInfo(name).Length;
+                count++;
+            }
+
+            bytes /= 1024;
+            bytes /= 1024;
+
+            lbl_backupFolderSize.Content = string.Format("Backup Folder Size : {0:0000} / {1:0000} MB", count, bytes);
         }
 
         void Screenshot(string path) {
@@ -299,6 +286,7 @@ namespace DarkSouls3BackupTool {
                         xw.WriteAttributeString("backup-if-not-changed", "false");
                         xw.WriteAttributeString("auto-start", "false");
                         xw.WriteAttributeString("log-to-file", "false");
+                        xw.WriteAttributeString("screenshot", "true");
                         xw.WriteEndElement();
 
                         xw.WriteEndElement();
@@ -312,12 +300,13 @@ namespace DarkSouls3BackupTool {
 
         internal class Config {
             XmlDocument doc;
-            XmlNode timeNode, miscNode;
+            XmlNode timeNode, maxNode, miscNode;
             MainWindow main;
 
             internal Attribute<int> Interval, MaxQuantity, MaxSize;
             internal Attribute<bool> Minutes, AutoStart, LogToFile,
-                                     IfNotRunning, IfNotChanged;
+                                     IfNotRunning, IfNotChanged,
+                                     Screenshot;
             
             internal Config(MainWindow main) {
                 this.main = main;
@@ -326,15 +315,18 @@ namespace DarkSouls3BackupTool {
                 doc.Load(main.ConfigFilename);
 
                 timeNode = doc.SelectSingleNode("Config/TimeInterval");
+                maxNode = doc.SelectSingleNode("Config/Max");
                 miscNode = doc.SelectSingleNode("Config/Misc");
 
                 Interval = new Attribute<int>("value", 15, this, timeNode);
-                MaxQuantity = new Attribute<int>("quantity", 100, this, miscNode);
-                MaxSize = new Attribute<int>("size", 1000, this, miscNode);
+                MaxQuantity = new Attribute<int>("quantity", 100, this, maxNode);
+                MaxSize = new Attribute<int>("size", 1000, this, maxNode);
                 Minutes = new Attribute<bool>("minutes", true, this, timeNode);
                 AutoStart = new Attribute<bool>("auto-start", false, this, miscNode);
+                LogToFile = new Attribute<bool>("log-to-file", false, this, miscNode);
                 IfNotRunning = new Attribute<bool>("backup-if-not-running", false, this, miscNode);
                 IfNotChanged = new Attribute<bool>("backup-if-not-changed", false, this, miscNode);
+                Screenshot = new Attribute<bool>("screenshot", true, this, miscNode);
             }
 
             public class Attribute<T> {

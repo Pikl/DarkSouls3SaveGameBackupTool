@@ -12,10 +12,9 @@
         </Grid.Background>
 
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="1280,-80,-868,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_close" Content="Close" ToolTip="Close the Help / About window" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="btn_close_Click" Height="21" Foreground="#FFF5EECF" BorderBrush="#FFF5EECF" Style="{StaticResource ButtonFix}" Background="#FF515151"/>
         <Label x:Name="lbl_helpContents" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Foreground="#FFF5EECF" Width="433" FontSize="8.5pt" Height="173">
             <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center" Width="422" Height="163">
-                Super Handy Dark Souls III Backup Tool!<LineBreak /><LineBreak />
+                Dark Souls III Super Backup Tool!<LineBreak /><LineBreak />
                 Creates backups every x seconds, or immediately when your saves are changed<LineBreak />
                 Maximum backup limit, deletes oldest backups when limit reached (size or quantity)<LineBreak />
                 Settings are stored in BackupConfig.xml within the Dark Souls AppData folder<LineBreak />
@@ -26,15 +25,15 @@
                 Quick 'n Easy backup loading UI, with thumbnails for each backup!<LineBreak />
             </TextBlock>
         </Label>
-        <Label x:Name="lbl_aboutContents" HorizontalAlignment="Center" Margin="112,188,107,0" VerticalAlignment="Top" Foreground="#FFF5EECF" Width="234" FontSize="8.5pt" Height="116">
-            <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center" Width="224" Height="110">
-                Original version created by svaalbard. <LineBreak />
+        <Label x:Name="lbl_aboutContents" HorizontalAlignment="Center" Margin="83,188,90,0" VerticalAlignment="Top" Foreground="#FFF5EECF" Width="277" FontSize="8.5pt" Height="116">
+            <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center" Width="267" Height="110">
+                Original tool created by svaalbard. <LineBreak />
                 github.com/insane0hflex <LineBreak /> <LineBreak />
                 
-                Version 3 rewrite created by Jess Thomason.<LineBreak />
-                TODO: GitHub link here!<LineBreak /> <LineBreak />
+                Super rewrite by Jess Thomason.<LineBreak />
+                github.com/Pikl/DarkSouls3SuperBackupTool<LineBreak /> <LineBreak />
                 
-                Current Version : 3.0 - 12/05/2016
+                Current Version : 1.0 - 13/05/2016
             </TextBlock>
         </Label>
         <Popup>

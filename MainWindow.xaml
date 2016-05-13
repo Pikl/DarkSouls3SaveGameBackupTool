@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DarkSouls3BackupTool"
         mc:Ignorable="d"
-        Title="Dark Souls 3 Backup Tool by Jess Thomason" Height="574.666" Width="331.333" ResizeMode="CanResizeWithGrip" Icon="Images\icon.png" WindowStartupLocation="CenterScreen">
+        Title="Dark Souls 3 Super Backup Tool" Height="435.666" Width="525.333" ResizeMode="NoResize" Icon="Images\icon.png" WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="Images\bg.jpg" Opacity=".87"/>
@@ -22,9 +22,10 @@
         <Button x:Name="btn_saveFolder" Content="Open AppData Folder" HorizontalAlignment="Right" Margin="0,36,10,0" VerticalAlignment="Top" Width="145" Click="btn_saveFolder_Click" ToolTip="Open your Dark Souls 3 saves folder" Foreground="#FFF5EECF" Height="21" BorderBrush="#FFF5EECF" Style="{StaticResource ButtonFix}" Background="#FF515151" />
         <Button x:Name="btn_settings" Content="Settings" HorizontalAlignment="Right" Margin="0,62,9,0" VerticalAlignment="Top" Width="146" Click="btn_settings_Click" ToolTip="Choose your Dark Souls 3 backup saves folder" Foreground="#FFF5EECF" Height="21" BorderBrush="#FFF5EECF" Style="{StaticResource ButtonFix}" Background="#FF515151" />
         <Button x:Name="btn_clear" Content="Clear Log" ToolTip="Clear all of the text within the Log Text Box" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="btn_clear_Click" Height="21" Foreground="#FFF5EECF" BorderBrush="#FFF5EECF" Style="{StaticResource ButtonFix}" Background="#FF515151"/>
-        <Label x:Name="lbl_log" Content="Log:" HorizontalAlignment="Left" Margin="10,91,0,145" Foreground="#FFF5EECF"/>
         <TextBox x:Name="txtBox_log" Margin="11,116,10,39" TextWrapping="Wrap" Text="" ScrollViewer.VerticalScrollBarVisibility="Visible" IsReadOnly="True" Background="#FF515151" Foreground="#FFF5EECF" BorderBrush="#FFF5EECF"/>
-        <Label x:Name="lbl_nextBackupTime" Content="Next Backup Time : 00:00" HorizontalAlignment="Right" Margin="0,91,10,145" Foreground="#FFF5EECF" Width="145"/>
-        <Label x:Name="lbl_backupFolderSize" Content="Backup Folder Size : 00000 / 0 MB" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,8" Foreground="#FFF5EECF" Width="193"/>
+        <Label x:Name="lbl_nextBackupTime" Content="Next Backup Time : 00:00:00" HorizontalAlignment="Right" Margin="0,88,5,148" Foreground="#FFF5EECF" Width="162"/>
+        <Label x:Name="lbl_backupFolderSize" Content="Backup Folder Size : 00000 / 0000 MB" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,8" Foreground="#FFF5EECF" Width="212"/>
+        <Label x:Name="lbl_log" Content="Log:" Margin="10,91,155,290" Foreground="#FFF5EECF"/>
+
     </Grid>
 </Window>

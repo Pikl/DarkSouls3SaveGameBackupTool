@@ -1,43 +1,41 @@
-# Dark Souls 3 Save Game Backup Tool
+# Dark Souls III Super Backup Tool!
+![DarkSouls3SuperBackupTool](https://github.com/pikl/DarkSouls3SuperBackupTool/blob/master/Images/example.png)
 
-A program that creates backups of your Dark Souls 3 save every 15 minutes by default. Can customize the back up time interval to be between 1 to 59 minutes.
+Original version by [insane0hflex](https://github.com/insane0hflex).
 
-Back ups are created in the following format (hours in 24HR military time format):
+### What do?
++ Creates backups every x seconds, or immediately when your saves are changed
++ Maximum backup limit, deletes oldest backups when limit reached (size or quantity)
++ Settings are stored in BackupConfig.xml within the Dark Souls AppData folder
++ Backs up all profiles if there are more than one (Steam accounts, GOG etc.)
++ Doesn't create backups if Dark Souls has not modified any saves
++ Doesn't create backups if Dark Souls is not running
++ Can start backing up immediately on startup
++ Quick 'n Easy backup loading UI, with thumbnails for each backup
 
-`Month_Day_Year_Hour_Minute__DS30000.sl2.bak`
-
-Like so: `5_2_2016_10_03__DS30000.sl2.bak`
-
-To restore a backup, either use the "Restore a Save" feature or delete your `DS30000.sl2` file and rename the backup of your choice to `DS30000.sl2`.
-
-Please note that you will start the backup process by pressing the "Start" button. Then start up Dark Souls 3 and play.
-
+### How do?
+The application will work without any prior configuration.
+Open the application and click the 'Start' button to start making a backup every 15 minutes.
 When you are done playing, press the "Stop" button.
 
-### [Download Dark Souls 3 Save Game Backup Tool](http://www.nexusmods.com/darksouls3/mods/16?)
+To restore a backup, click 'Restore a Backup'.
+To restore to the previous backup, click 'Restore previous'.
+Otherwise, scroll through the available backups listed, select one and click 'Restore'.
 
-#### [Virus Total Report for Dark Souls 3 Save Game Backup Tool 5/5/2016](https://www.virustotal.com/en/file/7cd31e90694bbe896272e5c81eca0762cb5f860ad926077c3673ba2e3a4a2253/analysis/1462494364/)
+#### Configuration
+Every feature is configurable through the 'Settings' button.
++ Option to backup every x minutes or seconds, or have the application detect any change made by Dark Souls III immediately.
++ Option to have a maximum backup limit, specified by quantity of backups, or size of backups. The oldest backups will be deleted to make room for the new ones. Use '0' for infinite backups.
++ All of these settings are stored in '''AppData/Roaming/DarkSoulsIII/BackupConfig.xml'''.
++ Supports multiple Dark Souls profiles, for people who have multiple Steam accounts or use more than one launcher, such as GOG.
++ Doesn't create backups if Dark Souls III has not modified any saves, or if Dark Souls III is not running. Can be turned on anyway.
++ Toggle option to start the backup process immediately on application startup.
++ Option to store screenshot thumbnails of Dark Souls III at the time of backup.
++ Option to stop backing up and close the backup tool when Dark Souls III is closed.
 
-Important note: Do not delete or remove the `DarkSouls3SaveGameBackupTool.exe.config` file. This stores the time interval setting. It must be in the same folder as the `DarkSouls3SaveGameBackupTool.exe` file.
+### What else should I know?
+Back ups are created in the following format:
+`Month-Day-Year_Hour-Minute-Second_DS30000.sl2`
 
-![DarkSouls3SaveGameBackupTool](https://github.com/insane0hflex/DarkSouls3SaveGameBackupTool/blob/master/Images/example.png)
-
-### ToDos
-- Key to create a back up manually (think of like an F5 to "quick save" of sorts
-- Keep a "MaxBackup" amount - like 10 - where older backups above 10 are automatically deleted.
-- By Lakon: ~~Add a specific folder for backup locations to save the back ups too~~
-- ~~Store TimeInterval setting for user~~
-- ~~Make back up file name built with a human readable date rather than .ToFileTime()~~
-- ~~Prettify the UI~~
-- ~~Better code comments~~
-- ~~Create a check for the `.exe.config` file and create it if it doesn't exist~~
-- ~~Restore save from backup feature (instead of user manually deleting the old save and renaming a backup to `DS30000.sl2`~~
-
-
-### Build Instructions
-
-Want to build from source?
-
-Download this repo then open the solution file (you will need Visual Studio installed with at least .NET Framework 4.0 installed) and build. You can get [Visual Studio Community](https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx) for free. Once you build, the binary (.exe file) is located in either the /bin/Debug/ folder or the /bin/Release/ folder.
-
-
+### Releases
+[Version 3.0](https://github.com/pikl/DarkSouls3SuperBackupTool/blob/master/Images/example.png)
