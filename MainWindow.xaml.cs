@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 
-namespace DarkSouls3BackupTool {
+namespace DarkSouls3SuperBackupTool {
     public partial class MainWindow : Window {
 
         #region Fields
@@ -74,6 +74,8 @@ namespace DarkSouls3BackupTool {
                 btn_Stop_Toggle(false);
 
             UpdateSize();
+
+            Log("Hello, " + Environment.UserName + "!");
         }
         #endregion
 
@@ -123,9 +125,9 @@ namespace DarkSouls3BackupTool {
         }
         
         void btn_settings_Click(object sender, RoutedEventArgs e) {
-            //Settings s = new Settings();
-            //s.Owner = this;
-            //s.ShowDialog();
+            Settings s = new Settings();
+            s.Owner = this;
+            s.ShowDialog();
         }
 
         void btn_clear_Click(object sender, RoutedEventArgs e) {

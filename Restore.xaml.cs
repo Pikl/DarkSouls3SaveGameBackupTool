@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace DarkSouls3BackupTool {
+namespace DarkSouls3SuperBackupTool {
     public partial class Restore : Window {
 
 

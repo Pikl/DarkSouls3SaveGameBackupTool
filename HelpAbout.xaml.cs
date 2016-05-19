@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DarkSouls3BackupTool {
+namespace DarkSouls3SuperBackupTool {
     public partial class HelpAbout : Window {
         public HelpAbout() {
             InitializeComponent();

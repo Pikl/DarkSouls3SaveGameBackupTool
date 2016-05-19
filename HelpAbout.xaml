@@ -1,9 +1,9 @@
-﻿<Window x:Class="DarkSouls3BackupTool.HelpAbout"
+﻿<Window x:Class="DarkSouls3SuperBackupTool.HelpAbout"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DarkSouls3BackupTool"
+        xmlns:local="clr-namespace:DarkSouls3SuperBackupTool"
         mc:Ignorable="d"
         Title="Help / About" Height="341.486" Width="456.466" ResizeMode="NoResize" Icon="Images\icon.png" WindowStartupLocation="CenterOwner">
     <Grid >
